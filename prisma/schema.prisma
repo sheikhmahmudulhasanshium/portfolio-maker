@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Project {
+  id           BigInt        @id @unique @default(autoincrement())
+  created_at   DateTime      @default(now()) @db.Timestamptz(6)
+  name         String        @db.VarChar
+  project_url  String        @db.VarChar
+  description  String?
+  logo_url     String        @db.VarChar
+  images       Json[]        @db.Json
+  person       person        @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  sub_projects sub_projects?
+  tech_stack   tech_stack?
+
+  @@map("projects")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model sub_projects {
+  id         BigInt   @id @default(autoincrement())
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  name       String   @db.VarChar
+  image      String?  @db.VarChar
+  projects   Project  @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("sub-projects")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model tech_stack {
+  id         BigInt   @id(map: "tech_stack_pkey") @default(autoincrement())
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  name       String   @unique(map: "tech_stack_name_key") @db.VarChar
+  logo       String?  @unique(map: "tech_stack_logo_key") @db.VarChar
+  projects   Project  @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tech_stack_id_fkey")
+
+  @@map("tech-stack")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model features {
+  id            BigInt  @id @default(autoincrement())
+  name          String  @db.VarChar
+  feature_image String? @db.VarChar
+  description   String?
+  person        person  @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model person {
+  id               BigInt          @id @default(autoincrement())
+  created_at       DateTime        @default(now()) @db.Timestamptz(6)
+  full_name        String          @db.VarChar
+  nick_name        String          @db.VarChar
+  phone            String
+  designation      String?
+  work_description String?
+  email            String
+  features         features?
+  projects         Project?
+  reviews          reviews?
+  social_handles   social_handles?
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model reviews {
+  id            BigInt   @id @unique @default(autoincrement())
+  created_at    DateTime @default(now()) @db.Timestamptz(6)
+  reviewer_name String   @db.VarChar
+  profile_url   String?  @db.VarChar
+  review        String   @db.VarChar
+  review_url    String   @db.VarChar
+  person        person   @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model social_handles {
+  id              BigInt   @id @unique @default(autoincrement())
+  created_at      DateTime @default(now()) @db.Timestamptz(6)
+  name            String   @db.VarChar
+  link            String   @db.VarChar
+  default_message String?
+  person          person   @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
