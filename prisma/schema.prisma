@@ -16,6 +16,7 @@ model Project {
   description  String?
   logo_url     String        @db.VarChar
   images       Json[]        @db.Json
+  status       String
   person       person        @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   sub_projects sub_projects?
   tech_stack   tech_stack?

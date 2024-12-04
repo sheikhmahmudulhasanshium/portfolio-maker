@@ -1,30 +1,38 @@
 import React from 'react';
 
 interface BodyProviderProps {
-  navbar?: React.ReactNode; // Navbar may be there
-  title: React.ReactNode; // Title can be a string or any React element
-  content: React.ReactNode; // The main content can be anything (e.g., JSX, text)
-  additionalContent?: React.ReactNode; // Optional additional content (can be any React element)
+  menubar?: React.ReactNode;
+  title: React.ReactNode;
+  content: React.ReactNode;
+  additionalContent?: React.ReactNode;
+  isSidebarCollapsed: boolean;  // New prop to pass the collapsed state
 }
 
-const BodyProvider: React.FC<BodyProviderProps> = ({ title, content, additionalContent,navbar }) => {
+const BodyProvider: React.FC<BodyProviderProps> = ({
+  title,
+  content,
+  additionalContent,
+  menubar,
+  isSidebarCollapsed,
+}) => {
   return (
-    <div className=" flex flex-col justify-between  w-full mb-16  gap-4 border">
-        {navbar}
-      {/* Render the title */}
-      <h1 className="text-center pt-4 text-2xl font-serif font-light">{title}</h1>
-
-      {/* Render the main content */}
-      <div className="relative z-0">
-        {content}
-      </div>
-
-      {/* Optionally render additional content if provided */}
-      {additionalContent && (
-        <div className="additional-content">
-          {additionalContent}
+    <div className="flex gap-6 p-4 w-full">
+      {menubar && (
+        <div className={`transition-all ${isSidebarCollapsed ? 'w-16' : 'w-64'}`}>
+          {menubar}
         </div>
       )}
+
+      <div className={`flex-1 space-y-6 ${isSidebarCollapsed ? 'w-11/12' : 'w-full'}`}>
+        <h1 className="text-3xl font-serif font-light text-center">{title}</h1>
+        <div className="w-full text-center">{content}</div>
+
+        {additionalContent && (
+          <div className="additional-content p-4 mt-6">
+            {additionalContent}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
