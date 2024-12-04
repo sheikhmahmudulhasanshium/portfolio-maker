@@ -1,13 +1,13 @@
 "use client";
-
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
 import { BookOpen, Check, ChevronsUpDown, X } from "lucide-react"; 
-import * as React from "react";
-
+import Link from "next/link";
+import transformForLink from "@/lib/format-name";
 const options = ['person', 'project', 'sub-project', 'review'];
 const actionButtons = [
   "Read Rows",
@@ -23,8 +23,8 @@ interface SideMenubarProps {
 }
 
 const SideMenubar: React.FC<SideMenubarProps> = ({ isCollapsed, setIsSidebarCollapsed }) => {
-  const [open, setOpen] = React.useState(false);
-  const [selectedOption, setSelectedOption] = React.useState<string | null>(null);
+  const [open, setOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   const handleOptionSelect = (option: string) => {
     setSelectedOption(prev => (prev === option ? null : option));
@@ -36,7 +36,7 @@ const SideMenubar: React.FC<SideMenubarProps> = ({ isCollapsed, setIsSidebarColl
   };
 
   return (
-    <div className={`relative ${isCollapsed ? 'w-16' : 'w-64'} h-screen transition-all shadow-lg`}>
+    <div className={`relative ${isCollapsed ? 'w-16' : 'w-full'}  transition-all shadow-lg`}>
       {/* Toggle Button inside the sidebar */}
       <Button
         variant="outline"
@@ -47,15 +47,14 @@ const SideMenubar: React.FC<SideMenubarProps> = ({ isCollapsed, setIsSidebarColl
         {isCollapsed ? <BookOpen className="opacity-60" /> : <X className="opacity-50" />}
       </Button>
 
-      <div className={`flex flex-col h-full p-4 space-y-4 ${isCollapsed ? 'hidden' : 'block'}`}>
+      <div className={`flex flex-col h-full p-4  space-y-4 ${isCollapsed ? 'hidden' : 'block'}`}>
         <Card>
           <CardHeader>
             <h2 className="text-xl font-semibold">API Docs</h2>
           </CardHeader>
           <CardContent>
             <div className="space-y-2 text-sm">
-              <p>Tables & Views</p>
-              <Separator />
+              <p className="text-sm">Tables & Views</p>
               {/* Combobox */}
               <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
@@ -98,8 +97,8 @@ const SideMenubar: React.FC<SideMenubarProps> = ({ isCollapsed, setIsSidebarColl
               {/* Action Buttons */}
               <div className="flex flex-col space-y-2">
                 {actionButtons.map((label) => (
-                  <Button key={label} variant="link" className="w-full text-left">
-                    {label}
+                  <Button key={label} variant="outline" className="hover:shadow-lg border-0">
+                    <Link href={`api/${transformForLink(selectedOption)}/#${transformForLink(label)}`} className='w-full text-left '>{label}</Link>
                   </Button>
                 ))}
               </div>

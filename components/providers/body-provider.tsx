@@ -16,9 +16,9 @@ const BodyProvider: React.FC<BodyProviderProps> = ({
   isSidebarCollapsed,
 }) => {
   return (
-    <div className="flex gap-6 p-4 w-full">
+    <div className="flex flex-wrap gap-6 p-4 w-full justify-center">
       {menubar && (
-        <div className={`transition-all ${isSidebarCollapsed ? 'w-16' : 'w-64'}`}>
+        <div className={`transition-all w-64 sm:full md:4/12 lg:4/12  ${isSidebarCollapsed ? 'w-12' : 'w-64'} `}>
           {menubar}
         </div>
       )}
