@@ -36,18 +36,19 @@ const SideMenubar: React.FC<SideMenubarProps> = ({ isCollapsed, setIsSidebarColl
   };
 
   return (
-    <div className={`relative ${isCollapsed ? 'w-16' : 'w-full'}  transition-all shadow-lg`}>
+    <div className={`relative  ${isCollapsed ? 'w-16' : 'w-64'}  transition-all shadow-lg`}>
       {/* Toggle Button inside the sidebar */}
       <Button
+        size={"icon"}
         variant="outline"
         onClick={toggleSidebar}
-        className={`absolute top-4  p-2 transition-transform duration-300 ${isCollapsed ? 'rotate-0 left-12' : 'left-52 rotate-180'}`}
+        className={`absolute top-4  transition-transform duration-300  ${isCollapsed ? 'rotate-0 left-0 sm:left-0 md:left-16 lg:left-24' : 'left-52 rotate-180'}`}
       >
         {/* Conditional rendering of icons */}
-        {isCollapsed ? <BookOpen className="opacity-60" /> : <X className="opacity-50" />}
+        {isCollapsed ? <BookOpen className="opacity-60 scale-125" /> : <X className="opacity-50 scale-125" />}
       </Button>
 
-      <div className={`flex flex-col h-full p-4  space-y-4 ${isCollapsed ? 'hidden' : 'block'}`}>
+      <div className={`flex flex-col h-full p-4 space-y-4 ${isCollapsed ? 'hidden' : 'block'}`}>
         <Card className="border-0 shadow-none">
           <CardHeader>
             <h2 className="text-xl font-semibold">API Docs</h2>
@@ -98,7 +99,7 @@ const SideMenubar: React.FC<SideMenubarProps> = ({ isCollapsed, setIsSidebarColl
               <div className="flex flex-col space-y-2">
                 {actionButtons.map((label) => (
                   <Button key={label} variant="outline" className="hover:shadow-lg border-0">
-                    <Link href={`api/${transformForLink(selectedOption)}/#${transformForLink(label)}`} className='w-full text-left '>{label}</Link>
+                    <Link href={(selectedOption===''||selectedOption===undefined||selectedOption===null)?`/api/#${transformForLink(label)}/`:`/api/${transformForLink(selectedOption)}/#${transformForLink(label)}`} className='w-full text-left '>{label}</Link>
                   </Button>
                 ))}
               </div>
