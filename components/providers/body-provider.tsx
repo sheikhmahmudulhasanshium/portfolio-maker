@@ -18,12 +18,12 @@ const BodyProvider: React.FC<BodyProviderProps> = ({
   return (
     <div className="flex flex-wrap gap-6 p-4 w-full justify-center">
       {menubar && (
-        <div className={`transition-all w-64 sm:full md:4/12 lg:4/12  ${isSidebarCollapsed ? 'w-12' : 'w-64'} `}>
+        <div className={`transition-all w-full sm:full md:4/12 lg:4/12 p-0 m-0 rounded-xl ${isSidebarCollapsed ? 'w-1/12' : 'w-64'} `}>
           {menubar}
         </div>
       )}
 
-      <div className={`flex-1 space-y-6 ${isSidebarCollapsed ? 'w-11/12' : 'w-full'}`}>
+      <div className={`flex-1  space-y-6 ${isSidebarCollapsed ? 'w-full shrink-0 flex flex-col' : 'w-full'}`}>
         <h1 className="text-3xl font-serif font-light text-center">{title}</h1>
         <div className="w-full text-center">{content}</div>
 

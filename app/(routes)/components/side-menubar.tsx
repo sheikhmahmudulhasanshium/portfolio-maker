@@ -48,7 +48,7 @@ const SideMenubar: React.FC<SideMenubarProps> = ({ isCollapsed, setIsSidebarColl
       </Button>
 
       <div className={`flex flex-col h-full p-4  space-y-4 ${isCollapsed ? 'hidden' : 'block'}`}>
-        <Card>
+        <Card className="border-0 shadow-none">
           <CardHeader>
             <h2 className="text-xl font-semibold">API Docs</h2>
           </CardHeader>
