@@ -1,0 +1,117 @@
+app/
+  ├── api/                            // API handling
+  │   ├── [resource]/                 // Dynamic folder for each resource (e.g., person, project, review)
+  │   │   ├── add.ts                  // API action to add a resource (e.g., add person)
+  │   │   ├── delete.ts               // API action to delete a resource (e.g., delete project)
+  │   │   ├── update.ts               // API action to update a resource (e.g., update review)
+  │   │   ├── list.ts                 // API endpoint to list all resources (e.g., list persons)
+  │   │   └── search.ts               // API endpoint for searching/filtering resources
+  │   │
+  │   ├── person/                     // Resource folder for 'person'
+  │   │   ├── add.ts                  // Add a new person
+  │   │   ├── delete.ts               // Delete person
+  │   │   ├── update.ts               // Update person details
+  │   │   ├── list.ts                 // List all persons
+  │   │   └── search.ts               // Search/filter persons
+  │   │
+  │   ├── project/                    // Resource folder for 'project'
+  │   │   ├── add.ts                  // Add a new project
+  │   │   ├── delete.ts               // Delete project
+  │   │   ├── update.ts               // Update project details
+  │   │   ├── list.ts                 // List all projects
+  │   │   └── search.ts               // Search/filter projects
+  │   │
+  │   ├── review/                     // Resource folder for 'review'
+  │   │   ├── add.ts                  // Add a new review
+  │   │   ├── delete.ts               // Delete review
+  │   │   ├── update.ts               // Update review
+  │   │   ├── list.ts                 // List all reviews
+  │   │   └── search.ts               // Search/filter reviews
+  │   │
+  │   ├── feature/                    // Resource folder for 'feature'
+  │   │   ├── add.ts                  // Add a new feature
+  │   │   ├── delete.ts               // Delete feature
+  │   │   ├── update.ts               // Update feature
+  │   │   ├── list.ts                 // List all features
+  │   │   └── search.ts               // Search/filter features
+  │   │
+  │   ├── social-handle/              // Resource folder for 'social-handle'
+  │   │   ├── add.ts                  // Add a new social handle
+  │   │   ├── delete.ts               // Delete social handle
+  │   │   ├── update.ts               // Update social handle
+  │   │   ├── list.ts                 // List all social handles
+  │   │   └── search.ts               // Search/filter social handles
+  │   │
+  │   ├── sub-project/                // Resource folder for 'sub-project'
+  │   │   ├── add.ts                  // Add a new sub-project
+  │   │   ├── delete.ts               // Delete sub-project
+  │   │   ├── update.ts               // Update sub-project
+  │   │   ├── list.ts                 // List all sub-projects
+  │   │   └── search.ts               // Search/filter sub-projects
+  │   └── ...                         // Other resource folders as needed
+  │
+  ├── manage/                         // Manage UI for resources
+  │   ├── page.tsx                    // Manage dashboard (list of resources)
+  │   ├── [resource]/                 // Dynamic folder for managing each resource (e.g., person, project, review)
+  │   │   ├── add/                    // Add resource page (e.g., add person)
+  │   │   │   └── page.tsx            // Add resource page component
+  │   │   ├── update/                 // Update resource page (e.g., update project)
+  │   │   │   └── page.tsx            // Update resource page component
+  │   │   ├── delete/                 // Delete resource page (e.g., delete review)
+  │   │   │   └── page.tsx            // Delete resource page component
+  │   │   ├── list/                   // List all resources (e.g., list persons)
+  │   │   │   └── page.tsx            // List resource page component
+  │   │   ├── search/                 // Search/filter resource (e.g., search persons)
+  │   │   │   └── page.tsx            // Search resource page component
+  │   │   └── components/             // UI components specific to the resource (e.g., Form, Card, etc.)
+  │   │       ├── Form.tsx            // Form for adding/editing resource
+  │   │       └── ResourceCard.tsx    // Display resource details
+  │   ├── components/                 // Common UI components like buttons, modals, etc.
+  │   │   ├── Button.tsx              // Reusable button component
+  │   │   ├── Modal.tsx               // Modal component
+  │   │   ├── SearchBar.tsx           // Search bar component
+  │   │   └── FilterSidebar.tsx       // Sidebar for filters
+  │   ├── search/                     // Folder for search and filter pages
+  │   │   ├── project/                // Search/filter project
+  │   │   │   ├── page.tsx            // Search project page
+  │   │   ├── person/                 // Search/filter person
+  │   │   │   ├── page.tsx            // Search person page
+  │   └── ...                         // Other resource management actions
+  │
+  ├── documentation/                  // API documentation and guides
+  │   ├── api.md                      // API usage and guides
+  │   └── resources.md                // Documentation for resources and actions
+  │
+  ├── components/                     // Shared UI components (buttons, modals, etc.)
+  │   ├── Button.tsx                  // Button component
+  │   ├── Modal.tsx                   // Modal component
+  │   ├── SearchBar.tsx               // Search bar component
+  │   └── FilterSidebar.tsx           // Sidebar for filters
+  │
+  ├── hooks/                          // Custom hooks for API calls, form handling, etc.
+  │   ├── useApi.ts                   // API call hook
+  │   └── useForm.ts                  // Form handling hook
+  │
+  ├── providers/                      // Context providers for global state
+  │   ├── ThemeProvider.tsx           // Theme context provider
+  │   └── AuthProvider.tsx            // Authentication context provider
+  │
+  ├── state/                          // State management (Redux, Zustand, etc.)
+  │   ├── store.ts                    // Global state store
+  │   └── actions.ts                  // Actions for state management
+  │
+  ├── styles/                         // Global styles (CSS or styled-components)
+  │   ├── globals.css                 // Global styles
+  │   └── theme.ts                    // Theme settings (colors, typography, etc.)
+  │
+  ├── utils/                          // Utility functions
+  │   ├── formatDate.ts               // Date formatting utility
+  │   └── validateForm.ts             // Form validation utility
+  │
+  ├── public/                         // Public assets (images, fonts, etc.)
+  │   ├── logo.png                    // Logo image
+  │   └── favicon.ico                 // Favicon
+  │
+  └── prisma/                         // Prisma setup for DB schema, migrations
+      ├── schema.prisma               // Prisma schema file
+      └── migrations/                 // Prisma migration files

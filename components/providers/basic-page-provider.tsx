@@ -1,5 +1,5 @@
-import Footer from "@/app/(routes)/components/footer";
-import Header from "@/app/(routes)/components/header";
+import Footer from "@/app/components/footer";
+import Header from "@/app/components/header";
 import { ReactNode } from "react";
 interface BasicPageProviderProps{
     header?: ReactNode;

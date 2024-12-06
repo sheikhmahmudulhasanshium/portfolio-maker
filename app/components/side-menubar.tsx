@@ -99,7 +99,7 @@ const SideMenubar: React.FC<SideMenubarProps> = ({ isCollapsed, setIsSidebarColl
               <div className="flex flex-col space-y-2">
                 {actionButtons.map((label) => (
                   <Button key={label} variant="outline" className="hover:shadow-lg border-0">
-                    <Link href={(selectedOption===''||selectedOption===undefined||selectedOption===null)?`/api/#${transformForLink(label)}/`:`/api/${transformForLink(selectedOption)}/#${transformForLink(label)}`} className='w-full text-left '>{label}</Link>
+                    <Link href={(selectedOption===''||selectedOption===undefined||selectedOption===null)?`/api/${transformForLink(label)}/`:`/api/${transformForLink(selectedOption)}/${transformForLink(label)}`} className='w-full text-left '>{label}</Link>
                   </Button>
                 ))}
               </div>
