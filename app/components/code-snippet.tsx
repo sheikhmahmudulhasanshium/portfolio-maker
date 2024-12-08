@@ -19,10 +19,10 @@ const CodeSnippet: React.FC<CodeSnippetProps> = ({ data, note }) => {
   };
 
   return (
-    <div className="flex flex-col justify-between items-center w-full shadow-lg py-4">
+    <div className="flex flex-col justify-between items-center w-full  py-4">
       <div className="justify-end flex w-full">
         <Button
-          variant="ghost"
+          variant="outline"
           size="icon"
           onClick={handleCopy}
           className={`transition-colors duration-300 ${copied ? 'text-green-500' : 'text-gray-600'}`}
