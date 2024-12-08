@@ -5,7 +5,7 @@ import ApiProvider from "@/components/providers/api-code-provider";
 import { List } from "lucide-react";
 
 const ListPersonPage = () => {
-  const {   personData } = useGetAllPersonInfo();
+  const {   personData,supabaseStatus, errorMessage} = useGetAllPersonInfo();
   //console.log(personData);
   const personCount=personData.length
   return (
@@ -17,7 +17,8 @@ const ListPersonPage = () => {
         additional={
           <div className="flex flex-col gap-2">
             <p className="text-xl">Example:</p>
-            <CodeSnippet data={personData} note={`// Showing Results: (${personCount}) ${personCount>1?'rows':'row'}`}/>
+            {(!supabaseStatus||errorMessage)&&<p className="text-red-500">{errorMessage}</p>}
+            {!errorMessage&&<CodeSnippet data={personData} note={`// Showing Results: (${personCount}) ${personCount>1?'rows':'row'}`}/>}
           </div>}
       />
     </div>

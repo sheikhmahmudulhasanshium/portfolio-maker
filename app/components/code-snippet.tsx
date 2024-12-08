@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Person } from "@/lib/types";
+import { Person,Project } from "@/lib/types";
 import { Copy, CheckCircle } from "lucide-react";
 
 interface CodeSnippetProps {
-  data: Person[];
+  data: Person[]|Project[];
   note?: string;
 }
 
