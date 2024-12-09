@@ -1,9 +1,9 @@
-import AddFeaturePage from "./add/page";
-import DeleteFeaturePage from "./delete/page";
-import ListFeaturePage from "./list/page";
-import SearchFeaturePage from "./search/page";
-import UpdateFeaturePage from "./update/page";
 import { HandHeart } from 'lucide-react';
+import AddFeaturePage from './add/page';
+import UpdateFeaturePage from './update/page';
+import SearchFeaturePage from './search/page';
+import ListFeaturePage from '../(routes)/list/feature';
+import DeleteFeaturePage from './delete/page';
 
 const FeatureBody = () => {
     return ( 

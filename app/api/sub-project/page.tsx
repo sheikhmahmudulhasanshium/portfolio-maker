@@ -1,11 +1,11 @@
 import BasicPageProvider from "@/components/providers/basic-page-provider";
-import ProjectBody from "./body";
-const ProjectPage = () => {
+import SubProjectBody from "./body";
+const SubProjectPage = () => {
     return (
         <BasicPageProvider >
-            <ProjectBody/>
+            <SubProjectBody/>
         </BasicPageProvider>
      );
 }
  
-export default ProjectPage;
+export default SubProjectPage;

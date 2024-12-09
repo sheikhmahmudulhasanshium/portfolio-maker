@@ -1,6 +1,6 @@
+import ListSubProjectPage from "../(routes)/list/sub-project";
 import AddProjectPage from "./add/page";
 import DeleteProjectPage from "./delete/page";
-import ListProjectPage from "./list/page";
 import SearchProjectPage from "./search/page";
 import UpdateProjectPage from "./update/page";
 import { Boxes } from 'lucide-react';
@@ -16,7 +16,7 @@ const SubProjectBody = () => {
             <AddProjectPage/>
             <UpdateProjectPage/>
             <SearchProjectPage/>
-            <ListProjectPage/>
+            <ListSubProjectPage/>
             <DeleteProjectPage/>
         </div>
      );
