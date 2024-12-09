@@ -1,6 +1,6 @@
+import ListProjectPage from "../(routes)/list/project";
 import AddProjectPage from "./add/page";
 import DeleteProjectPage from "./delete/page";
-import ListProjectPage from "./list/page";
 import SearchProjectPage from "./search/page";
 import UpdateProjectPage from "./update/page";
 import { Codesandbox } from 'lucide-react';
