@@ -1,11 +1,11 @@
 'use client'
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Feature, Person,Project, SubProject } from "@/lib/types";
+import { Feature, Person,PersonFormData,Project, SubProject } from "@/lib/types";
 import { Copy, CheckCircle } from "lucide-react";
 
 interface CodeSnippetProps {
-  data: Person[]|Project[]|Feature[]|SubProject[];
+  data: Person[]|Project[]|Feature[]|SubProject[]|PersonFormData;
   note?: string;
 }
 

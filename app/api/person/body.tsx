@@ -1,5 +1,5 @@
 import ListPersonPage from "../(routes)/list/person";
-import AddPersonPage from "./add/page";
+import AddPersonPage from "../(routes)/add/person";
 import DeletePersonPage from "./delete/page";
 import SearchPersonPage from "./search/page";
 import UpdatePersonPage from "./update/page";

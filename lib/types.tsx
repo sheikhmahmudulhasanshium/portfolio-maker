@@ -69,3 +69,14 @@ export interface SocialHandle {
   default_message?: string;
   person: Person;
 }
+
+// lib/types.ts
+
+export interface PersonFormData {
+  full_name: string;
+  nick_name: string; 
+  phone: string;
+  email: string;
+  designation?: string; // Now optional
+  work_description?: string; // Now optional
+}

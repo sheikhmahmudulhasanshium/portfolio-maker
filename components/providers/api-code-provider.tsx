@@ -9,13 +9,14 @@ import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 
 type ApiProviderProps = {
+  custom_form?: ReactNode;
   providerName: ReactNode;
   link: string;
   description: ReactNode;
   additional?: ReactNode; 
 };
 
-const ApiProvider: React.FC<ApiProviderProps> = ({ providerName, link, description, additional }) => {
+const ApiProvider: React.FC<ApiProviderProps> = ({ providerName, link, description, additional,custom_form }) => {
   const [showAdditional, setShowAdditional] = useState(false);
 
   const handleCopyClick = () => {
@@ -36,7 +37,11 @@ const ApiProvider: React.FC<ApiProviderProps> = ({ providerName, link, descripti
           <CopyIcon size={16} />
         </Button>
       </div>
-
+      {
+        custom_form&&(
+          <>{custom_form}</>
+        )
+      }
       
       {additional && (
         <div className="mt-4">
