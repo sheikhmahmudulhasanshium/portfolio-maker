@@ -1,15 +1,33 @@
-'use client'
-import React from 'react';
-import ApiProvider from "@/components/providers/api-code-provider";
+'use client';
+import React, { useState, useEffect } from 'react';
+import ApiProvider from '@/components/providers/api-code-provider';
 import { UserRoundPlus } from 'lucide-react';
 import { AddPersonForm } from '@/components/modals/add-person-form';
-import CodeSnippet from '@/app/components/code-snippet';
-import { useGetAllPersonInfo } from '@/components/hooks/person/get-all';
+import { useSearchParams } from 'next/navigation';
 
 const AddPersonPage = () => {
-  const {   personData,supabaseStatus, errorMessage} = useGetAllPersonInfo();
-  //console.log(personData);
-  const personCount=personData.length
+  const [dynamicLink, setDynamicLink] = useState('/api/person/add?');
+  const searchParams = useSearchParams();
+
+  // Function to update the link dynamically
+  const updateLink = (formData: Record<string, string>) => {
+    const query = new URLSearchParams(formData).toString();
+    setDynamicLink(`/api/person/add?${query}`);
+  };
+
+  // Effect to parse URL query params and update the link initially
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    const queryObject: Record<string, string> = {};
+    params.forEach((value, key) => {
+      queryObject[key] = value;
+    });
+
+    // Update the link with existing URL parameters
+    if (Object.keys(queryObject).length > 0) {
+      updateLink(queryObject);
+    }
+  }, [searchParams]);
 
   return (
     <div className="py-8 flex items-center justify-center" id="add-person">
@@ -19,21 +37,12 @@ const AddPersonPage = () => {
             <UserRoundPlus /> <p>Add Person</p>
           </div>
         }
-        link="/api/person/add/"
-        description="This adds person in person database"
+        link={dynamicLink} // Dynamic link passed here
+        description="This adds person to the person database"
         custom_form={
-          <AddPersonForm/>
-        }
-        additional={
-          <div className="flex flex-col gap-2">
-            <p className="text-xl">Example:</p>
-            {(!supabaseStatus||errorMessage)&&<p className="text-red-500">{errorMessage}</p>}
-            {!errorMessage&&<CodeSnippet data={personData} note={`// Showing Results: (${personCount}) ${personCount>1?'rows':'row'}`}/>}
-                   </div>
+          <AddPersonForm updateLink={updateLink} /> // Pass `updateLink` to the form
         }
       />
-
-      
     </div>
   );
 };

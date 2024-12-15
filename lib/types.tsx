@@ -37,7 +37,7 @@ export interface Feature {
 }
 
 export interface Person {
-  id: bigint;
+  id: string; // Change from BigInt to string
   created_at: Date;
   full_name: string;
   nick_name: string;
@@ -50,6 +50,7 @@ export interface Person {
   reviews?: Review;
   social_handles?: SocialHandle;
 }
+
 
 export interface Review {
   id: bigint;

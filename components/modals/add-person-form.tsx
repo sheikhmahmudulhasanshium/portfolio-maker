@@ -2,41 +2,24 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import { z } from "zod";
 import { useAddPersonInfo } from "@/components/hooks/person/add";
-import { Person, } from "@/lib/types";
+import { Person } from "@/lib/types";
 
-// Zod schema for validation
 const personFormSchema = z.object({
   full_name: z.string().min(3, { message: "Full name must be at least 3 characters long" }),
   nick_name: z.string().min(3, { message: "Nick name must be at least 3 characters long" }),
-  phone: z
-    .string()
-    .regex(
-      /^[+]?[\d\s-]+$/,
-      { message: "Phone number must only contain digits, spaces, '-', or start with '+'" }
-    )
-    .min(10, { message: "Phone number must be at least 10 characters long" })
-    .max(20, { message: "Phone number cannot exceed 20 characters" }),
+  phone: z.string().min(10, { message: "Phone number must be at least 10 characters long" }).max(20),
   email: z.string().email({ message: "Invalid email address" }),
   designation: z.string().optional(),
   work_description: z.string().optional(),
 });
 
-// Use the `Person` interface as the expected type
-
-export const AddPersonForm = () => {
+export const AddPersonForm = ({ updateLink }: { updateLink: (formData: Record<string, string>) => void }) => {
   const form = useForm<z.infer<typeof personFormSchema>>({
     resolver: zodResolver(personFormSchema),
     defaultValues: {
@@ -52,21 +35,29 @@ export const AddPersonForm = () => {
   const { addPerson, loading, successMessage, errorMessage } = useAddPersonInfo();
 
   const onSubmit = async (values: z.infer<typeof personFormSchema>) => {
-    // Add `id` and `created_at` to match `Person` interface
     const person: Person = {
       ...values,
-      id: BigInt(Date.now()), // Example: Generate a unique ID
-      created_at: new Date(), // Use current date/time
+      id: Date.now().toString(),
+      created_at: new Date(),
     };
 
+    // Update the link with form data
+    updateLink(values);
+
+    // Submit data
     await addPerson(person);
     if (!errorMessage) form.reset();
   };
 
   return (
-    <Form {...form} >
-      <form onSubmit={form.handleSubmit(onSubmit)} className="py-6 my-4 gap-3 flex flex-col shadow px-8 rounded-2xl w-full">
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="py-6 my-4 gap-3 flex flex-col shadow px-8 rounded-2xl w-full"
+        onChange={() => updateLink(form.getValues())} // Update link dynamically on form change
+      >
         <FormLabel className="text-xl py-2">Enter Information</FormLabel>
+
         {/* Full Name */}
         <FormField
           control={form.control}
